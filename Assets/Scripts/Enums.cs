@@ -6,12 +6,20 @@
         Wall,
     }
 
-    public enum RoomType
+    public enum DungeonType
     {
-        Normal,
+        Castle,
         Snow,
         Lava,
         Desert,
         Town,
+    }
+
+    public enum Directions
+    {
+        UP,
+        DOWN,
+        RIGHT,
+        LEFT
     }
 }

@@ -12,4 +12,3 @@ namespace Sauce.Interfaces
         GameObject GetGO();
     }
 }
-
