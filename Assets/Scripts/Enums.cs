@@ -20,6 +20,6 @@
         UP,
         DOWN,
         RIGHT,
-        LEFT
+        LEFT,
     }
 }
