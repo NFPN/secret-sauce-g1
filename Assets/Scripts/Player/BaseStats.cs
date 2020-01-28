@@ -3,11 +3,16 @@
 namespace Sauce.Character
 {
     [Serializable]
-    public class PlayerStats
+    public class BaseStats
     {
         public short health;
+        public float moveSpeed;
+    }
+
+    [Serializable]
+    public class PlayerStats : BaseStats
+    {
         public short stamina;
         public short mana;
-        public float moveSpeed;
     }
 }

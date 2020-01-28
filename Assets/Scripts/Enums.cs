@@ -8,6 +8,7 @@
 
     public enum DungeonType
     {
+        NONE,
         Castle,
         Snow,
         Lava,
@@ -15,11 +16,32 @@
         Town,
     }
 
-    public enum Directions
+    public enum Direction4
     {
+        NONE,
         UP,
         DOWN,
         RIGHT,
         LEFT,
+    }
+
+    public enum Direction8
+    {
+        NONE,
+        UP,
+        DOWN,
+        RIGHT,
+        LEFT,
+        UPLEFT,
+        UPRIGHT,
+        DOWNLEFT,
+        DOWNRIGHT,
+    }
+
+    public enum TAG
+    {
+        Player,
+        Enemy,
+        Tile,
     }
 }

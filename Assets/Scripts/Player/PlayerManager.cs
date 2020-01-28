@@ -1,4 +1,5 @@
 ﻿using Sauce.Character;
+using Sauce.Enums;
 using UnityEngine;
 
 namespace Sauce
@@ -8,10 +9,21 @@ namespace Sauce
         [SerializeField]
         private GameObject player;
 
+        //TODO: Use IoC
         private void Start()
         {
-            var playerObj = GetPlayerType(player);
-            playerObj.SetPlayer(new PlayerMovement());
+            if (player == null)
+                player = GameObject.FindGameObjectWithTag(TAG.Player.ToString());
+
+            try
+            {
+                var playerObj = GetPlayerType(player);
+                playerObj.SetPlayer(new Movement(new PlayerInput()));
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogError(ex);
+            }
         }
 
         private Player GetPlayerType(GameObject player) => player.GetComponent<Player>();

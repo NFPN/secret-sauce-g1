@@ -1,5 +1,4 @@
-﻿using Sauce.Enums;
-using Sauce.Extensions;
+﻿using Sauce.Extensions;
 using Sauce.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,8 +14,8 @@ namespace Sauce
         [SerializeField]
         private int size;
 
-        [SerializeField]
-        private Directions[] sides;
+        //[SerializeField]
+        //private Directions[] sides;
 
         [SerializeField]
         private GameObject tile;
@@ -29,8 +28,10 @@ namespace Sauce
         #region Properties
 
         public int Size { get => size; set => size = value; }
-        public Directions[] Sides { get => sides; set => sides = value; }
+
+        //public Directions[] Sides { get => sides; set => sides = value; }
         public GameObject Tile { get => tile; set => tile = value; }
+
         public List<GameObject> Tiles { get => tiles; set => tiles = value; }
         public List<ITile> WallTiles { get; set; }
         public Vector2 Position { get => transform.position; }

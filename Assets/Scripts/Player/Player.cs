@@ -4,29 +4,32 @@ using UnityEngine;
 namespace Sauce.Character
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class Player : MonoBehaviour
+    [RequireComponent(typeof(SpriteRenderer))]
+    public class Player : MonoBehaviour, IHaveBody, IHaveSprite
     {
         [SerializeField]
         private PlayerStats playerStats;
 
-        [SerializeField]
-        private Rigidbody2D myRigidbody;
+        private IMove2D Movement { get; set; }
 
-        private IMove2D movement;
+        public BaseStats Stats => playerStats;
+        public Rigidbody2D Body2D { get; private set; }
+        public SpriteRenderer Sprite { get; private set; }
 
         private void Start()
         {
-            myRigidbody = GetComponent<Rigidbody2D>();
+            Body2D = GetComponent<Rigidbody2D>();
+            Sprite = GetComponent<SpriteRenderer>();
         }
 
         private void FixedUpdate()
         {
-            movement?.Move(myRigidbody);//should pass this as ICanMove interface
+            Movement?.Move(this);
         }
 
         public void SetPlayer(IMove2D movement)
         {
-            this.movement = movement;
+            Movement = movement;
         }
     }
 }
