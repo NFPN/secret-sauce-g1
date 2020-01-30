@@ -4,7 +4,6 @@ using UnityEngine;
 namespace Sauce.Character
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    [RequireComponent(typeof(SpriteRenderer))]
     public class Player : MonoBehaviour, IHaveBody, IHaveSprite
     {
         [SerializeField]
@@ -19,7 +18,7 @@ namespace Sauce.Character
         private void Start()
         {
             Body2D = GetComponent<Rigidbody2D>();
-            Sprite = GetComponent<SpriteRenderer>();
+            Sprite = GetComponentInChildren<SpriteRenderer>();
         }
 
         private void FixedUpdate()
@@ -27,7 +26,7 @@ namespace Sauce.Character
             Movement?.Move(this);
         }
 
-        public void SetPlayer(IMove2D movement)
+        public void SetPlayerMovement(IMove2D movement)
         {
             Movement = movement;
         }

@@ -44,4 +44,12 @@
         Enemy,
         Tile,
     }
+
+    public enum EnemyType
+    {
+        Minion,
+        Normal,
+        Hard,
+        Boss
+    }
 }

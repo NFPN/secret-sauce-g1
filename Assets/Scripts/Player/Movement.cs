@@ -1,5 +1,4 @@
-﻿using Sauce.Enums;
-using Sauce.Interfaces;
+﻿using Sauce.Interfaces;
 using UnityEngine;
 
 namespace Sauce.Character
@@ -10,27 +9,22 @@ namespace Sauce.Character
 
         private IHandleInput Inputs { get; set; }
 
-        public Direction4 LastDirection
+        public bool FacingRight
         {
-            get => GetLastPosition();
-            private set => LastDirection = value;
+            get => Inputs != null ? Inputs.Horizontal > 0 : true;
+            private set => FacingRight = value;
         }
 
         #endregion Properties
 
         public Movement(IHandleInput input) => Inputs = input;
 
-        public void Move(IHaveBody body) =>
+        public void Move(IHaveBody body)
+        {
             body.Body2D.MovePosition(body.Body2D.position + Inputs.Direction * body.Stats.moveSpeed * Time.fixedDeltaTime);
 
-        private Direction4 GetLastPosition()
-        {
-            if (Inputs.Horizontal < 0)
-                return Direction4.LEFT;
-            if (Inputs.Horizontal > 0)
-                return Direction4.RIGHT;
-
-            return Direction4.NONE;
+            if (Inputs.Horizontal != 0)
+                body.Sprite.flipX = !FacingRight;
         }
     }
 }

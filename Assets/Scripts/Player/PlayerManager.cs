@@ -2,15 +2,15 @@
 using Sauce.Enums;
 using UnityEngine;
 
-namespace Sauce
+namespace Sauce.Manager
 {
-    public class PlayerManager : MonoBehaviour
+    public class PlayerManager : ManagerBase
     {
         [SerializeField]
         private GameObject player;
 
         //TODO: Use IoC
-        private void Start()
+        public override void Start()
         {
             if (player == null)
                 player = GameObject.FindGameObjectWithTag(TAG.Player.ToString());
@@ -18,7 +18,7 @@ namespace Sauce
             try
             {
                 var playerObj = GetPlayerType(player);
-                playerObj.SetPlayer(new Movement(new PlayerInput()));
+                playerObj.SetPlayerMovement(new Movement(new PlayerInput()));
             }
             catch (System.Exception ex)
             {

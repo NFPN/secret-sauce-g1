@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Sauce.Interfaces
 {
-    public interface IHaveBody
+    public interface IHaveBody : IHaveSprite
     {
         Rigidbody2D Body2D { get; }
         BaseStats Stats { get; }

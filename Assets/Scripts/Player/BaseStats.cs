@@ -15,4 +15,10 @@ namespace Sauce.Character
         public short stamina;
         public short mana;
     }
+
+    [Serializable]
+    public class EnemyStats : BaseStats
+    {
+        public short level;
+    }
 }
