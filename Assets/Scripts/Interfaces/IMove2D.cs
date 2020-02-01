@@ -7,6 +7,6 @@
         /// </summary>
         bool FacingRight { get; }
 
-        void Move(IHaveBody rigidbody2D);
+        void Move(IHavePlayerBody rigidbody2D);
     }
 }

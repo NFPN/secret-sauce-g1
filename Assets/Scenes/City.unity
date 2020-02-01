@@ -352,11 +352,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ad35a2aa24c97e4388656963704150a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStats:
+  _stats:
     health: 100
     moveSpeed: 3
     stamina: 50
     mana: 100
+  _currency:
+    magicEssences: 100
+    magicCrystals: 1
 --- !u!50 &993003582
 Rigidbody2D:
   serializedVersion: 4

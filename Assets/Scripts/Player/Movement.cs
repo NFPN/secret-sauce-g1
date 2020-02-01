@@ -19,9 +19,9 @@ namespace Sauce.Character
 
         public Movement(IHandleInput input) => Inputs = input;
 
-        public void Move(IHaveBody body)
+        public void Move(IHavePlayerBody body)
         {
-            body.Body2D.MovePosition(body.Body2D.position + Inputs.Direction * body.Stats.moveSpeed * Time.fixedDeltaTime);
+            body.Body2D.MovePosition(body.Body2D.position + Inputs.Direction * body.Stats.MoveSpeed * Time.fixedDeltaTime);
 
             if (Inputs.Horizontal != 0)
                 body.Sprite.flipX = !FacingRight;
