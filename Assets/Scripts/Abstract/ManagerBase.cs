@@ -2,7 +2,7 @@
 {
     public abstract class ManagerBase
     {
-        public short CurrentLevel => 0;
+        public short CurrentLevel { get; private set; }
 
         public virtual void Awake()
         { }
@@ -21,5 +21,7 @@
         /// </summary>
         public virtual void OnApplicationStop()
         { }
+
+        internal void AddLevel() => CurrentLevel++;
     }
 }

@@ -13,6 +13,8 @@ namespace Sauce.Manager
 
         public GameObject PlayerObj { get; private set; }
 
+        #region Override Methods
+
         public override void Start()
         {
             if (PlayerObj == null)
@@ -20,8 +22,14 @@ namespace Sauce.Manager
 
             try
             {
-                var playerObj = GetPlayerType(PlayerObj);
-                playerObj.SetPlayerMovement(new Movement(new PlayerInput()));
+                var player = GetPlayerType();
+                player.SetPlayerMovement(new Movement(new PlayerInput()));
+                SetPlayerPostion();
+
+                //Should be fading out or sth
+
+                //Loads player info thus freeing movement
+                LoadPlayerInfo(GetPlayerType());
             }
             catch (Exception ex)
             {
@@ -31,20 +39,25 @@ namespace Sauce.Manager
 
         public override void Update()
         {
-            if (Input.GetKeyDown(KeyCode.L))
-                SavePlayer(GetPlayerType(PlayerObj));
+            /*if (Input.GetKeyDown(KeyCode.L))
+                SavePlayerInfo(GetPlayerType());
             if (Input.GetKeyDown(KeyCode.K))
-                LoadPlayer(GetPlayerType(PlayerObj));
+                LoadPlayerInfo(GetPlayerType());*/
         }
 
-        private Player GetPlayerType(GameObject player) => player.GetComponent<Player>();
+        public override void OnApplicationStop() => SavePlayerInfo(GetPlayerType());
 
-        public override void OnApplicationStop()
+        #endregion Override Methods
+
+        public Player GetPlayerType() => PlayerObj.GetComponent<Player>();
+
+        public void SetPlayerPostion()
         {
-            SavePlayer(GetPlayerType(PlayerObj));
+            var spawPoint = GameObject.FindGameObjectWithTag(TAG.PlayerSpawn.ToString());
+            PlayerObj.transform.position = spawPoint.transform.position;
         }
 
-        private void SavePlayer(Player player)
+        private void SavePlayerInfo(Player player)
         {
             var info = new PlayerInfo()
             {
@@ -59,28 +72,24 @@ namespace Sauce.Manager
                 new BinaryFormatter().Serialize(file, info);
         }
 
-        private PlayerInfo LoadPlayer(Player player = null)
+        private void LoadPlayerInfo(Player player = null)
         {
             try
             {
                 Debug.Log($@"Loading player info from: {SavePath}");
 
-                var playerData = PlayerInfo.None;
                 using (FileStream file = File.Open(SavePath, FileMode.OpenOrCreate))
                 {
                     object loadedData = new BinaryFormatter().Deserialize(file);
-                    playerData = (PlayerInfo)loadedData;
+                    var playerData = (PlayerInfo)loadedData;
 
                     if (player != null)
                         player.SetData(playerData.Currency, playerData.Stats);
                 }
-
-                return playerData;
             }
             catch (Exception ex)
             {
                 Debug.LogError(new Exception("Loading has Failed: ", ex));
-                return PlayerInfo.None;
             }
         }
     }

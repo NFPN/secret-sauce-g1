@@ -9,7 +9,7 @@ namespace Sauce.Manager
         public static PlayerInfo None => new PlayerInfo();
 
         public IHavePlayerStats Stats { get; set; }
-        public Currency Currency { get; set; }
+        public Currency Currency { get; set; } //TODO: make interface
         public short LastLevel { get; set; }
     }
 }

@@ -1,4 +1,7 @@
-﻿using Sauce.Interfaces;
+﻿using Sauce.Enums;
+using Sauce.Interfaces;
+using Sauce.Manager;
+using System.Linq;
 using UnityEngine;
 
 namespace Sauce.Character
@@ -43,6 +46,18 @@ namespace Sauce.Character
         public void SetPlayerMovement(IMove2D movement)
         {
             Movement = movement;
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.tag == TAG.LevelExit.ToString())
+            {
+                //TODO
+                var mm = FindObjectOfType<MasterManager>();
+                mm.IncreaseCurrentLevel();
+                var pmanager = mm.managers.FirstOrDefault(m => m.GetType() == typeof(PlayerManager));
+                (pmanager as PlayerManager).SetPlayerPostion();
+            }
         }
     }
 }

@@ -43,6 +43,8 @@
         Player,
         Enemy,
         Tile,
+        PlayerSpawn,
+        LevelExit,
     }
 
     public enum EnemyType

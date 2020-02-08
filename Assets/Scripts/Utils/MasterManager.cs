@@ -5,9 +5,9 @@ namespace Sauce.Manager
 {
     public class MasterManager : MonoBehaviour
     {
-        private readonly List<ManagerBase> managers = new List<ManagerBase>();
+        public readonly List<ManagerBase> managers = new List<ManagerBase>();
 
-        private void Awake() => managers?.ForEach(m => m.Awake());
+        private void Awake() => managers?.ForEach(m => m.Awake());//NOTE: is this necessary?
 
         private void Start()
         {
@@ -28,5 +28,7 @@ namespace Sauce.Manager
             if (pause)
                 managers?.ForEach(m => m.OnApplicationStop());
         }
+
+        public void IncreaseCurrentLevel() => managers?.ForEach(m => m.AddLevel());
     }
 }
